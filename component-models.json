@@ -227,6 +227,13 @@
     "id": "testimonial",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "value": "",
+        "label": "Heading"
+      },
+      {
         "component": "richtext",
         "valueType": "string",
         "name": "quote",
