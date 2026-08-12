@@ -323,3 +323,13 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+
+.section.bg-light {
+  background-color: #f5f5f5;
+}
+
+.section.bg-dark {
+  background-color: #02005c;
+  color: #fff;
+}

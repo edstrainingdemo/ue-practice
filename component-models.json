@@ -136,6 +136,14 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Light Background",
+            "value": "bg-light"
+          },
+          {
+            "name": "Dark Background",
+            "value": "bg-dark"
           }
         ]
       }
