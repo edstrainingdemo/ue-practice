@@ -12,7 +12,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   text-align: center;
-  background-color: var(--background-color, #f0ff22);
+  background-color: #f0ff22;
 }
 
 .testimonial-quote {
