@@ -8,8 +8,9 @@ export default function decorate(block) {
     moveInstrumentation(row, li);
     while (row.firstElementChild) li.append(row.firstElementChild);
 
-    const [quoteDiv, authorDiv, ratingDiv, featuredDiv] = [...li.children];
+    const [headingDiv, quoteDiv, authorDiv, ratingDiv, featuredDiv] = [...li.children];
 
+    if (headingDiv) headingDiv.className = 'testimonial-heading';
     if (quoteDiv) quoteDiv.className = 'testimonial-quote';
     if (authorDiv) authorDiv.className = 'testimonial-author';
 
