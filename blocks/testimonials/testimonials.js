@@ -16,7 +16,7 @@ export default function decorate(block) {
     if (ratingDiv) {
       const rating = ratingDiv.textContent.trim();
       ratingDiv.className = 'testimonial-rating';
-      ratingDiv.textContent = '\u2605'.repeat(Number(rating) || 0);
+      ratingDiv.textContent = '\u2605'.repeat(rating || 0);
     }
 
     if (featuredDiv) {
