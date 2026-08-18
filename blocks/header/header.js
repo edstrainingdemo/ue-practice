@@ -1,20 +1,25 @@
 export default function decorate(block) {
-  // Row 0 = the "header" model fields (logo, logoAlt, logoLink)
-  // Rows 1..n = the repeatable "header-nav-item" children (text, link)
   const rows = [...block.children];
-  const [logoRow, ...navRows] = rows;
+
+  // Every row is now an equal-status child: either a "header-brand" item
+  // (contains an image/picture field) or a "header-nav-item" (text + link).
+  // Classify by content rather than position, since either order is valid.
+  const brandRows = rows.filter((row) => row.querySelector('picture, img'));
+  const brandRow = brandRows[0]; // guard: only render the first Brand, in
+  // case an author adds more than one (component-filters.json can't cap
+  // the count of a given child type, so this is enforced defensively here)
+  brandRows.slice(1).forEach((extra) => extra.remove());
+  const navRows = rows.filter((row) => row !== brandRow && !brandRows.includes(row));
 
   // --- Brand / logo ---------------------------------------------------
-  // Keep the original row element (preserves its aue attributes) and just
-  // tag it with a class for styling + wrap the picture in a home link.
-  if (logoRow) {
-    logoRow.classList.add('header-brand');
+  if (brandRow) {
+    brandRow.classList.add('header-brand');
 
-    const picture = logoRow.querySelector('picture');
-    const existingLink = logoRow.querySelector('a');
+    const picture = brandRow.querySelector('picture');
+    const existingLink = brandRow.querySelector('a');
     const homeHref = existingLink ? existingLink.getAttribute('href') : '/';
 
-    if (picture && !logoRow.querySelector('.header-brand-link')) {
+    if (picture && !brandRow.querySelector('.header-brand-link')) {
       const brandLink = document.createElement('a');
       brandLink.className = 'header-brand-link';
       brandLink.href = homeHref || '/';
@@ -26,8 +31,7 @@ export default function decorate(block) {
 
   // --- Navigation -------------------------------------------------------
   // Wrap the ORIGINAL nav-item rows in <li> elements rather than
-  // extracting their text/href into new nodes. This keeps each row's
-  // aue-resource / aue-prop attributes intact for authoring.
+  // extracting their text/href into new nodes, so aue attributes survive.
   const nav = document.createElement('nav');
   nav.setAttribute('aria-label', 'Main');
   const ul = document.createElement('ul');
@@ -35,7 +39,7 @@ export default function decorate(block) {
   navRows.forEach((row) => {
     row.classList.add('header-nav-item');
     const li = document.createElement('li');
-    li.append(row); // moves the original row (and its aue attrs) into the li
+    li.append(row);
     ul.append(li);
   });
 

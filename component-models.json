@@ -198,7 +198,7 @@
     ]
   },
   {
-    "id": "header",
+    "id": "header-brand",
     "fields": [
       {
         "component": "reference",

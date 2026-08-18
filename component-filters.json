@@ -44,6 +44,7 @@
   {
     "id": "header",
     "components": [
+      "header-brand",
       "header-nav-item"
     ]
   },
