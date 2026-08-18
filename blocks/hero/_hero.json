@@ -34,6 +34,13 @@
           "label": "Alt",
           "value": ""
         },
+          {
+          "component": "text",
+          "valueType": "string",
+          "name": "description",
+          "label": "Description",
+          "value": ""
+        },
         {
           "component": "richtext",
           "name": "text",
