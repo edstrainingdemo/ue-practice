@@ -38,6 +38,24 @@ export default function decorate(block) {
 
   navRows.forEach((row) => {
     row.classList.add('header-nav-item');
+
+    const cells = [...row.children];
+    const textCell = cells[0]; // "text" field
+    const linkCell = cells[1]; // "aem-content" field (renders as <a href="...">url</a>)
+    const anchor = linkCell?.querySelector('a');
+    const label = textCell?.textContent?.trim();
+
+    if (anchor && label) {
+      // Use the authored text as the visible label instead of the raw URL.
+      // The href (tracked by aue for the "link" field) is left untouched.
+      anchor.textContent = label;
+    }
+
+    // Keep the original text-field div in the DOM (preserves its aue
+    // attributes / inline-edit target) but hide it visually now that its
+    // content has been merged into the anchor above.
+    if (textCell) textCell.classList.add('header-nav-item-label');
+
     const li = document.createElement('li');
     li.append(row);
     ul.append(li);

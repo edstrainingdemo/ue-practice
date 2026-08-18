@@ -43,8 +43,8 @@ header .header.block {
   display: flex;
 }
 
-.header nav .header-nav-item > div {
-  display: contents;
+.header nav .header-nav-item-label {
+  display: none;
 }
 
 .header nav a {
