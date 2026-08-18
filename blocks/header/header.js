@@ -4,62 +4,45 @@ export default function decorate(block) {
   const rows = [...block.children];
   const [logoRow, ...navRows] = rows;
 
-  // --- Brand / logo -------------------------------------------------
-  const brand = document.createElement('div');
-  brand.className = 'header-brand';
-
+  // --- Brand / logo ---------------------------------------------------
+  // Keep the original row element (preserves its aue attributes) and just
+  // tag it with a class for styling + wrap the picture in a home link.
   if (logoRow) {
+    logoRow.classList.add('header-brand');
+
     const picture = logoRow.querySelector('picture');
-    const img = logoRow.querySelector('img');
-    const link = logoRow.querySelector('a');
-    const homeHref = link ? link.getAttribute('href') : '/';
+    const existingLink = logoRow.querySelector('a');
+    const homeHref = existingLink ? existingLink.getAttribute('href') : '/';
 
-    const brandLink = document.createElement('a');
-    brandLink.href = homeHref || '/';
-    brandLink.setAttribute('aria-label', 'Home');
-
-    if (picture) {
+    if (picture && !logoRow.querySelector('.header-brand-link')) {
+      const brandLink = document.createElement('a');
+      brandLink.className = 'header-brand-link';
+      brandLink.href = homeHref || '/';
+      brandLink.setAttribute('aria-label', 'Home');
+      picture.replaceWith(brandLink);
       brandLink.append(picture);
-    } else if (img) {
-      brandLink.append(img);
     }
-
-    brand.append(brandLink);
   }
 
-  // --- Navigation -----------------------------------------------------
+  // --- Navigation -------------------------------------------------------
+  // Wrap the ORIGINAL nav-item rows in <li> elements rather than
+  // extracting their text/href into new nodes. This keeps each row's
+  // aue-resource / aue-prop attributes intact for authoring.
   const nav = document.createElement('nav');
   nav.setAttribute('aria-label', 'Main');
-
   const ul = document.createElement('ul');
 
   navRows.forEach((row) => {
-    const cells = [...row.children];
-    // Expected order per model: [text, link]
-    const textCell = cells[0];
-    const linkCell = cells[1];
-
-    const existingLink = row.querySelector('a');
-    const href = existingLink
-      ? existingLink.getAttribute('href')
-      : linkCell?.textContent?.trim();
-    const label = existingLink
-      ? existingLink.textContent.trim()
-      : textCell?.textContent?.trim();
-
-    if (!label) return;
-
+    row.classList.add('header-nav-item');
     const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = href || '#';
-    a.textContent = label;
-    li.append(a);
+    li.append(row); // moves the original row (and its aue attrs) into the li
     ul.append(li);
   });
 
   nav.append(ul);
+  block.append(nav);
 
-  // --- Mobile toggle ---------------------------------------------------
+  // --- Mobile toggle ------------------------------------------------------
   const navToggle = document.createElement('button');
   navToggle.className = 'header-nav-toggle';
   navToggle.setAttribute('aria-label', 'Open navigation');
@@ -72,7 +55,5 @@ export default function decorate(block) {
     navToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
   });
 
-  // --- Assemble ---------------------------------------------------------
-  block.textContent = '';
-  block.append(brand, nav, navToggle);
+  block.append(navToggle);
 }

@@ -39,6 +39,14 @@ header .header.block {
   padding: 0;
 }
 
+.header nav .header-nav-item {
+  display: flex;
+}
+
+.header nav .header-nav-item > div {
+  display: contents;
+}
+
 .header nav a {
   font-size: 14px;
   font-weight: 400;
