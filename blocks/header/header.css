@@ -47,7 +47,7 @@ header .header.block {
   display: none;
 }
 
-.header nav .header-nav-item-label p{
+.header .header-nav-item p{
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
