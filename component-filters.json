@@ -41,6 +41,12 @@
     ]
   },
   {
+    "id": "header",
+    "components": [
+      "header-nav-item"
+    ]
+  },
+  {
     "id": "testimonials",
     "components": [
       "testimonial"

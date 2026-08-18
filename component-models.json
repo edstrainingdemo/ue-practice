@@ -198,6 +198,48 @@
     ]
   },
   {
+    "id": "header",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "logo",
+        "label": "Logo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "logoAlt",
+        "label": "Logo alt text",
+        "value": "JSW Motors"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "logoLink",
+        "label": "Logo link (home)"
+      }
+    ]
+  },
+  {
+    "id": "header-nav-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "text",
+        "label": "Link text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link URL"
+      }
+    ]
+  },
+  {
     "id": "hero",
     "fields": [
       {
