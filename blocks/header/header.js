@@ -34,6 +34,10 @@ export default function decorate(block) {
   // extracting their text/href into new nodes, so aue attributes survive.
   const nav = document.createElement('nav');
   nav.setAttribute('aria-label', 'Main');
+
+  // Brand now lives inside <nav>, as its first child.
+  if (brandRow) nav.append(brandRow);
+
   const ul = document.createElement('ul');
 
   navRows.forEach((row) => {

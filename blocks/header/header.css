@@ -1,8 +1,4 @@
 header .header.block {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between;
-  gap: 24px;
   padding: 18px 40px;
   background-color: var(--background-color, #fff);
 }
@@ -23,11 +19,12 @@ header .header.block {
   display: block;
 }
 
-/* --- Nav ------------------------------------------------------------ */
+/* --- Nav (now wraps both brand and links) ---------------------------- */
 .header nav {
-  flex: 1 1 auto;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 }
 
 .header nav ul {
@@ -45,11 +42,6 @@ header .header.block {
 
 .header nav .header-nav-item-label {
   display: none;
-}
-
-.header-nav-item p{
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
 }
 
 .header nav a {
@@ -102,6 +94,10 @@ header .header.block {
   }
 
   .header nav {
+    position: static;
+  }
+
+  .header nav ul {
     position: absolute;
     top: 100%;
     left: 0;
@@ -109,21 +105,18 @@ header .header.block {
     display: none;
     background-color: var(--background-color, #fff);
     box-shadow: 0 8px 16px rgb(0 0 0 / 8%);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 8px 20px 16px;
   }
 
   .header .header.block {
     position: relative;
   }
 
-  .header.block.nav-open nav {
-    display: block;
-  }
-
-  .header nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    padding: 8px 20px 16px;
+  .header.block.nav-open nav ul {
+    display: flex;
   }
 
   .header nav ul li {
